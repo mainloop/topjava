@@ -28,9 +28,8 @@ public class UserMealsUtil {
 
         List<UserMealWithExceed> list =
                 getFilteredMealsWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
-        for (UserMealWithExceed m : list) {
-            System.out.println(m);
-        }
+
+        list.forEach( System.out::println);
 //        .toLocalDate();
 //        .toLocalTime();
     }
