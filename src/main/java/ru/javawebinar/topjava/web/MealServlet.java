@@ -40,7 +40,10 @@ public class MealServlet extends HttpServlet {
         );
         List<UserMealWithExceed> filteredMealsWithExceeded = UserMealsUtil.getFilteredMealsWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
 
+        String str = request.getParameter("supporttype");
+
         request.setAttribute("mealList",filteredMealsWithExceeded);
+        request.setAttribute("testing", str);
 
         request.getRequestDispatcher("/mealList.jsp").
                 forward(request, response);

@@ -1,6 +1,8 @@
 package ru.javawebinar.topjava.model;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 /**
  * GKislin
@@ -22,8 +24,13 @@ public class UserMealWithExceed {
         this.exceed = exceed;
     }
 
-    public LocalDateTime getDateTime() {
+    public LocalDateTime getLocalDateTime() {
         return dateTime;
+    }
+
+    public Date getDateTime()
+    {
+        return  Date.from( dateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
     public int getCalories() {
