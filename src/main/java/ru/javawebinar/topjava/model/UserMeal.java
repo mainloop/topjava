@@ -38,5 +38,13 @@ public class UserMeal {
         return calories;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserMeal{" +
+                "id=" + id +
+                ", dateTime=" + dateTime +
+                ", description='" + description + '\'' +
+                ", calories=" + calories +
+                '}';
+    }
 }

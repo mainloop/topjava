@@ -25,6 +25,16 @@ public class MealServlet extends HttpServlet {
 
     private static final MapMealDaoImpl dao = new MapMealDaoImpl();
 
+    static {
+        dao.create(new UserMeal(0,LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500));
+        dao.create(new UserMeal(0,LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500));
+        dao.create(new UserMeal(0,LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000));
+        dao.create(new UserMeal(0,LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500));
+        dao.create(new UserMeal(0,LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000));
+        dao.create(new UserMeal(0,LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500));
+        dao.create(new UserMeal(0,LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510));
+    }
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -40,17 +50,26 @@ public class MealServlet extends HttpServlet {
                     break;
                 }
                 case "edit": {
+                    int id = Integer.valueOf(identificator);
+                    UserMeal userMeal = dao.read(id);
+                    request.setAttribute("id",userMeal.getId());
+                    request.setAttribute("calories",userMeal.getCalories());
+                    request.setAttribute("description",userMeal.getDescription());
+                    request.setAttribute("date",userMeal.getDateTime());
                     break;
                 }
                 default: {
                     String description = request.getParameter("description");
-                    String calories = request.getParameter("calories");
+                    int calories =  Integer.valueOf(request.getParameter("calories"));
+                    int id =  Integer.valueOf(request.getParameter("id"));
+                    String date = request.getParameter("date");
+                    dao.update( new UserMeal(id,LocalDateTime.of(2015, Month.MAY, 30, 20, 0), description, calories ));
                 }
             }
         }
 
 
-        List<UserMealWithExceed> filteredMealsWithExceeded = UserMealsUtil.getFilteredMealsWithExceeded(dao.list(), LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+        List<UserMealWithExceed> filteredMealsWithExceeded = UserMealsUtil.getFilteredMealsWithExceeded(dao.list(), LocalTime.of(0, 0), LocalTime.of(23, 59), 2000);
         request.setAttribute("mealList",filteredMealsWithExceeded);
 
 

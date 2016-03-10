@@ -22,6 +22,9 @@
 <h2>Meal list</h2>
 
 
+
+
+
 <form method="post">
       <input type="hidden" name="id" value="${id}" />
       <label for="description">description</label>
@@ -34,12 +37,10 @@
 </form>
 
 
-<a>
-${operation} </a>
+<a>id ${operation} </a>
 <br>
-<a>
-${identificator}
-</a>
+<a>ident ${identificator}</a>
+
 
 
 
