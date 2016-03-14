@@ -1,4 +1,4 @@
-package ru.javawebinar.topjava.model;
+package ru.javawebinar.topjava.service.to;
 
 import java.time.LocalDateTime;
 
@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
  * 11.01.2015.
  */
 public class UserMealWithExceed {
-    protected final Integer id;
+
+    private Integer id;
 
     private final LocalDateTime dateTime;
 
@@ -47,6 +48,14 @@ public class UserMealWithExceed {
 
     public boolean isExceed() {
         return exceed;
+    }
+
+    public boolean isNew() {
+        return id == null;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
