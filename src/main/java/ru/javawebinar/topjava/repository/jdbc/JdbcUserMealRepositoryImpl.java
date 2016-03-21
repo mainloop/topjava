@@ -12,8 +12,6 @@ import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,21 +24,14 @@ import java.util.List;
 @Repository
 public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
-    private static final RowMapper<UserMeal> ROW_MAPPER = new RowMapper<UserMeal>() {
-        @Override
-        public UserMeal mapRow(ResultSet resultSet, int i) throws SQLException {
-            UserMeal meal = new UserMeal();
-            meal.setId(resultSet.getInt("id"));
-            meal.setDescription(resultSet.getString("description"));
-            meal.setCalories(resultSet.getInt("calories"));
-            meal.setDateTime(resultSet.getTimestamp("date").toLocalDateTime());
-            return meal;
-        }
-    };
-
-
-
-//  private static final BeanPropertyRowMapper<UserMeal> ROW_MAPPER = BeanPropertyRowMapper.newInstance(UserMeal.class);
+    private static final RowMapper<UserMeal> ROW_MAPPER = (resultSet, i) -> {
+                UserMeal meal = new UserMeal();
+                meal.setId(resultSet.getInt("id"));
+                meal.setDescription(resultSet.getString("description"));
+                meal.setCalories(resultSet.getInt("calories"));
+                meal.setDateTime(resultSet.getTimestamp("date").toLocalDateTime());
+                return meal;
+            };
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
