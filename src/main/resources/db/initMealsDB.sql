@@ -11,4 +11,4 @@ CREATE TABLE meals
   user_id     INTEGER NOT NULL
 );
 
-
+CREATE INDEX meals_user_idx ON meals(user_id);
