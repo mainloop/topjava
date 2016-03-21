@@ -7,7 +7,7 @@ CREATE TABLE meals
   id          INTEGER PRIMARY KEY DEFAULT nextval('meals_seq'),
   description VARCHAR NOT NULL,
   calories    INTEGER DEFAULT 500 NOT NULL,
-  date_time   TIMESTAMP DEFAULT now(),
+  date        TIMESTAMP DEFAULT now(),
   user_id     INTEGER NOT NULL
 );
 
