@@ -1,6 +1,6 @@
 package ru.javawebinar.topjava.service;
 
-import org.junit.After;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +16,6 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.Collections;
-
-import static org.junit.Assert.*;
 
 
 import static ru.javawebinar.topjava.MealTestData.*;
@@ -88,23 +86,20 @@ public class UserMealServiceTest {
 
     @Test
     public void testSave() throws Exception {
-        UserMeal tm = new UserMeal(null, LocalDateTime.of(2016, Month.MARCH, 22, 20, 0), "newPass", 1555);
+        UserMeal tm = new UserMeal(null, LocalDateTime.of(2016, Month.MARCH, 22, 20, 0), "newMeal", 1555);
         UserMeal created = service.save(tm, USER_ID);
         tm.setId(created.getId());
         MATCHER.assertCollectionEquals(Arrays.asList(USER_MEAL, tm), service.getAll(USER_ID));
     }
 
-
-    //  - Сделаеть тесты на чужих юзеров (delete, get, update) с тем чтобы получить `NotFoundException`
-
     @Test(expected = NotFoundException.class)
     public void testGetNotFound() throws Exception {
-        service.get(USER_MEAL_ID,ADMIN_ID);
+        service.get(USER_MEAL_ID, ADMIN_ID);
     }
 
     @Test(expected = NotFoundException.class)
-    public void testNotFoundDelete() throws Exception {
-        service.delete(ADMIN_MEAL_ID,USER_ID);
+    public void testDeleteNotFound() throws Exception {
+        service.delete(ADMIN_MEAL_ID, USER_ID);
     }
 
     @Test(expected = NotFoundException.class)
