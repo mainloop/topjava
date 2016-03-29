@@ -28,8 +28,7 @@ public class UserMeal extends BaseEntity {
 
 
     @Column(name = "date_time")
-    private Timestamp dateTime;
-    // private LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     @Column(name = "description")
     private String description;
@@ -50,14 +49,14 @@ public class UserMeal extends BaseEntity {
 
     public UserMeal(Integer id, LocalDateTime dateTime, String description, int calories) {
         super(id);
-        this.dateTime = Timestamp.valueOf(dateTime);
+        this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
     }
 
     public UserMeal(User user, Integer id, LocalDateTime dateTime, String description, int calories) {
         super(id);
-        this.dateTime = Timestamp.valueOf(dateTime);
+        this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
         this.user = user;
@@ -65,7 +64,7 @@ public class UserMeal extends BaseEntity {
 
 
     public LocalDateTime getDateTime() {
-        return dateTime.toLocalDateTime();
+        return dateTime;
     }
 
     public String getDescription() {
@@ -77,7 +76,7 @@ public class UserMeal extends BaseEntity {
     }
 
     public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = Timestamp.valueOf(dateTime);
+        this.dateTime = dateTime;
     }
 
     public void setDescription(String description) {

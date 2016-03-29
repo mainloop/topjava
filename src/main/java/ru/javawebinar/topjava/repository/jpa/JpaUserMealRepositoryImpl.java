@@ -33,7 +33,7 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
         } else {
             if (em.createNamedQuery(UserMeal.UPDATE)
                     .setParameter("description", userMeal.getDescription())
-                    .setParameter("date_time", Timestamp.valueOf(userMeal.getDateTime()))
+                    .setParameter("date_time", userMeal.getDateTime())
                     .setParameter("calories", userMeal.getCalories())
                     .setParameter("id", userMeal.getId())
                     .setParameter("user_id", userId).executeUpdate() == 0) {
@@ -73,8 +73,8 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
         return em.createNamedQuery(UserMeal.BY_DATE_TIME, UserMeal.class)
                 .setParameter("user_id", userId)
-                .setParameter("start", Timestamp.valueOf(startDate))
-                .setParameter("stop", Timestamp.valueOf(endDate))
+                .setParameter("start", startDate)
+                .setParameter("stop", endDate)
                 .getResultList();
     }
 }
